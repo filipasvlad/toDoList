@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>To Do List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<style>
+	.container {
+		padding-top: 30px; /* Ajusteaz? aceast? valoare dup? cum este necesar */
+	}
+</style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">To Do List</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/tasks}">Tasks Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/tasks/create}">Add Task</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+	<div class ="container">
+		<table class = "table table-striped table-bordered">
+			<thead class = "table-dark">
+				<tr>
+					<th> Task</th>
+					<th> Date</th>
+					<th> Status </th>
+					<th> Mark Completed </th>
+					<th> Update </th>
+					<th> Delete </th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each = "task: ${tasks}">
+					<td th:text = "${task.getTaskDescription()}"></td>
+					<td th:text = "${task.getDate()}"></td>
+					<td th:text = "${task.getStatus()}"></td>
+					<td>
+						<a th:href = "@{/tasks/complete/{id}(id=${task.getId()})}"
+						   class = "btn btn-primary">Make Completed</a>
+					</td>
+					<td>
+						<a th:href = "@{/tasks/edit/{id}(id=${task.getId()})}"
+						 class = "btn btn-primary">Update</a>
+					</td>
+					<td>
+						<a th:href = "@{/tasks/delete/{id}(id=${task.getId()})}"
+						   class = "btn btn-danger">Delete</a>
+					</td>
+
+				</tr>
+			</tbody>
+		
+		</table>
+		
+	</div>
+</body>
+</html>
